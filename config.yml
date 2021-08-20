@@ -1,0 +1,40 @@
+log:
+# Default: "ERROR"
+  level: DEBUG
+
+# https://doc.traefik.io/traefik/v2.4/observability/access-logs/
+accessLog: {}
+
+experimental:
+  localPlugins:
+    example:
+      moduleName: github.com/traefik/plugindemo
+
+global:
+  # Send anonymous usage data
+  sendAnonymousUsage: false
+
+entryPoints:
+  web:
+    address: ':8090'
+  traefik:
+    address: ':8092'
+api:
+  dashboard: true
+  insecure: true
+
+metrics:
+# enable the Prometheus https://doc.traefik.io/traefik/observability/metrics/prometheus/
+  prometheus: {}
+
+# Enable Consul Catalog configuration backend.
+providers:
+  file:
+    filename: /home/ttys3/repo/go/cloudnative/demo/dyn.yml
+  # consulCatalog:
+  #   prefix: traefik
+  #   exposedByDefault: false
+  #   endpoint:
+  #     address: 'consul.service.dc1.consul:8500'
+  #     scheme: http
+
